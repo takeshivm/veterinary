@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Procedures extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'description',
+    ];
+
+    public function consultations()
+    {
+        return $this->belongsToMany(Consultations::class);
+    }
 }

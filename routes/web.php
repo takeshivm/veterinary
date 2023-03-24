@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OwnersController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/owners', [OwnersController::class, 'index']);
 
 Route::get('/test-db-connection', function() {
     try {

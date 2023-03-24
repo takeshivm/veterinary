@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('clinical_histories', function (Blueprint $table) {
             $table->id();
+            $table->text('allergies')->nullable();
+            $table->text('chronic_diseases')->nullable();
+            $table->text('previous_treatments')->nullable();
+            $table->text('previous_diagnosis')->nullable();
+            $table->text('medical_tests')->nullable();
+            $table->text('test_results')->nullable();
+            $table->text('recommended_treatments')->nullable();
+            $table->text('monitoring_plans')->nullable();
+            $table->unsignedBigInteger('pet_id');
             $table->timestamps();
+
+            $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
         });
     }
 

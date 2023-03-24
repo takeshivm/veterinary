@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('date');
+            $table->string('reason');
+            $table->text('observations')->nullable();
+            $table->decimal('weight', 5, 2)->nullable();
+            $table->decimal('temperature', 5, 2)->nullable();
+            $table->integer('heart_rate')->nullable();
+            $table->integer('respiratory_rate')->nullable();
+            $table->unsignedBigInteger('clinical_history_id');
             $table->timestamps();
+
+            $table->foreign('clinical_history_id')->references('id')->on('clinical_histories')->onDelete('cascade');
         });
     }
 

@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOwnersRequest;
 use App\Http\Requests\UpdateOwnersRequest;
 use App\Models\Owners;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class OwnersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('owners.index');
     }
 
     /**
