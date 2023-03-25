@@ -19,7 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/owners', [OwnersController::class, 'index']);
+Route::resource('owners', OwnersController::class)->only(['index', 'store', 'create']);
+
 
 Route::get('/test-db-connection', function() {
     try {

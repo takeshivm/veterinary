@@ -1,30 +1,50 @@
-<x-app-layout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        <form method="" action="">
-            @csrf
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ __('First Name') }}</label>
-                    <input type="text" name="first_name" value="{{ old('first_name') }}" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+@extends('layouts.app')
+
+@section('title', 'Owners')
+
+@section('content')
+<div class="bg-blue-100 py-4">
+    <div class="container mx-auto px-4">
+        <div class="bg-white shadow-md rounded px-8 py-6">
+            <h1 class="text-2xl font-bold mb-6 text-blue-600">{{ __('Add Owner') }}</h1>
+            <form action="{{ route('owners.store') }}" method="POST">
+                @csrf
+                <div class="mb-6">
+                    <label class="block text-blue-600 font-bold mb-2" for="first_name">{{ __('First Name') }}</label>
+                    <input class="appearance-none bg-blue-100 border-b border-blue-600 w-full py-2 px-3 text-blue-600 leading-tight focus:outline-none focus:shadow-outline @error('first_name') border-red-500 @enderror" id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                    @error('first_name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ __('Last Name') }}</label>
-                    <input type="text" name="last_name" value="{{ old('last_name') }}" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                <div class="mb-6">
+                    <label class="block text-blue-600 font-bold mb-2" for="last_name">{{ __('Last Name') }}</label>
+                    <input class="appearance-none bg-blue-100 border-b border-blue-600 w-full py-2 px-3 text-blue-600 leading-tight focus:outline-none focus:shadow-outline @error('last_name') border-red-500 @enderror" id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" required>
+                    @error('last_name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                 </div>
-            </div>
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700">{{ __('Address') }}</label>
-                <textarea name="address" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('address') }}</textarea>
-                <x-input-error :messages="$errors->get('address')" class="mt-2" />
-            </div>
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700">{{ __('Phone') }}</label>
-                <input type="text" name="phone" value="{{ old('phone') }}" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-            </div>
-            <x-primary-button class="mt-4">{{ __('Register Owner') }}</x-primary-button>
-        </form>
+                <div class="mb-6">
+                    <label class="block text-blue-600 font-bold mb-2" for="address">{{ __('Address') }}</label>
+                    <input class="appearance-none bg-blue-100 border-b border-blue-600 w-full py-2 px-3 text-blue-600 leading-tight focus:outline-none focus:shadow-outline @error('address') border-red-500 @enderror" id="address" type="text" name="address" value="{{ old('address') }}">
+                    @error('address')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mb-6">
+                    <label class="block text-blue-600 font-bold mb-2" for="phone">{{ __('Phone') }}</label>
+                    <input class="appearance-none bg-blue-100 border-b border-blue-600 w-full py-2 px-3 text-blue-600 leading-tight focus:outline-none focus:shadow-outline @error('phone') border-red-500 @enderror" id="phone" type="tel" name="phone" value="{{ old('phone') }}">
+                    @error('phone')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="flex items-center justify-center">
+                    <button class="bg-teal-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        {{ __('Add') }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</x-app-layout>
+</div>
+
+@endsection
