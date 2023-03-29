@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\OwnersController;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PetsController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,15 +20,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('owners', OwnersController::class)->only(['index', 'store', 'create']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::get('/test-db-connection', function() {
-    try {
-        DB::connection()->getPdo();
-        echo "Connected successfully to the database.";
-    } catch (\Exception $e) {
-        die("Could not connect to the database. Please check your configuration. Error: " . $e->getMessage());
-    }
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('owners', OwnersController::class)
+    ->only(['index', 'store', 'create', 'update', 'show', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('pets', PetsController::class)
+    ->only(['index', 'store', 'create', 'update', 'show', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+require __DIR__.'/auth.php';
