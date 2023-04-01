@@ -17,7 +17,22 @@ class OwnersFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'address' => $this->faker->address(),
+            'phone' => $this->faker->phoneNumber(),
         ];
+    }
+
+    public function withFakeData()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'first_name' => $this->faker->firstName(),
+                'last_name' => $this->faker->lastName(),
+                'address' => $this->faker->address(),
+                'phone' => $this->faker->phoneNumber(),
+            ];
+        });
     }
 }

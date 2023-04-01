@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -31,8 +27,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('owners', OwnersController::class)
-    ->only(['index', 'store', 'create', 'update', 'show', 'destroy'])
-    ->middleware(['auth', 'verified']);
+    ->only(['index', 'store', 'create', 'edit', 'update', 'show', 'destroy'])
+    ->middleware(['auth']);
 
 Route::resource('pets', PetsController::class)
     ->only(['index', 'store', 'create', 'update', 'show', 'destroy'])

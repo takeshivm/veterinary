@@ -13,9 +13,11 @@ class OwnersController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(): View
     {
-        return view('owners.index');
+        $owners = Owners::all();
+        return view('owners.index', ['owners' => $owners]);
     }
 
     /**
@@ -23,7 +25,7 @@ class OwnersController extends Controller
      */
     public function create()
     {
-        //
+        return view('owners.create');
     }
 
     /**
@@ -32,6 +34,20 @@ class OwnersController extends Controller
     public function store(StoreOwnersRequest $request)
     {
         //
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $address = $request->input('address');
+        $phone = $request->input('phone');
+
+        $owner = new Owners();
+        $owner->first_name = $first_name;
+        $owner->last_name = $last_name;
+        $owner->address = $address;
+        $owner->phone = $phone;
+
+        $owner->save();
+        return redirect()->route('owners.index');
+
     }
 
     /**
@@ -65,4 +81,5 @@ class OwnersController extends Controller
     {
         //
     }
+
 }

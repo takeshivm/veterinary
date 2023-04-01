@@ -14,6 +14,7 @@ class OwnersPolicy
     public function viewAny(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -22,6 +23,7 @@ class OwnersPolicy
     public function view(User $user, Owners $owners): bool
     {
         //
+        return true;
     }
 
     /**
@@ -30,6 +32,7 @@ class OwnersPolicy
     public function create(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +41,7 @@ class OwnersPolicy
     public function update(User $user, Owners $owners): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +50,7 @@ class OwnersPolicy
     public function delete(User $user, Owners $owners): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +59,7 @@ class OwnersPolicy
     public function restore(User $user, Owners $owners): bool
     {
         //
+        return true;
     }
 
     /**
@@ -62,5 +68,6 @@ class OwnersPolicy
     public function forceDelete(User $user, Owners $owners): bool
     {
         //
+        return true;
     }
 }
